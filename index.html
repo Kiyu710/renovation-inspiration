@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#263a2d" />
+    <meta name="description" content="随手记录装修材质、布局和空间灵感的本地笔记簿" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <title>灵感簿 · 装修灵感随手记</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="回到首页">
+          <span class="brand-mark" aria-hidden="true">↗</span>
+          <span>
+            <strong>灵感簿</strong>
+            <small>HOME NOTES / 01</small>
+          </span>
+        </a>
+        <div class="header-actions">
+          <button class="icon-button" id="exportBtn" title="导出笔记" aria-label="导出笔记">↓</button>
+          <button class="avatar" title="你的空间" aria-label="你的空间">M</button>
+        </div>
+      </header>
+
+      <main id="top">
+        <section class="intro">
+          <div>
+            <p class="eyebrow">MY RENOVATION JOURNEY · 2026</p>
+            <h1>把路上遇到的<br /><em>好想法，先收好。</em></h1>
+            <p class="intro-copy">看到喜欢的材质、灯光或一个顺手的收纳细节，<br class="desktop-only" />现在就记下来，等真正装修时再慢慢挑。</p>
+          </div>
+          <div class="intro-stamp" aria-label="灵感统计">
+            <span id="totalCount">06</span>
+            <small>条灵感<br />已收藏</small>
+          </div>
+        </section>
+
+        <section class="quick-capture" aria-label="快速记录">
+          <div class="capture-icon" aria-hidden="true">✦</div>
+          <div class="capture-copy">
+            <strong>刚刚有个想法？</strong>
+            <span>用一句话、一个房间或一张图留住它。</span>
+          </div>
+          <button class="primary-button" id="openComposer"><span>＋</span> 记一条</button>
+        </section>
+
+        <section class="toolbar" aria-label="筛选和搜索">
+          <div class="search-wrap">
+            <span aria-hidden="true">⌕</span>
+            <input id="searchInput" type="search" placeholder="搜索材质、房间或关键词" />
+          </div>
+          <div class="filter-row" id="filterRow" role="tablist" aria-label="按房间筛选">
+            <button class="filter-chip active" data-filter="全部" role="tab" aria-selected="true">全部 <span id="allCount">06</span></button>
+            <button class="filter-chip" data-filter="客厅" role="tab" aria-selected="false">客厅</button>
+            <button class="filter-chip" data-filter="厨房" role="tab" aria-selected="false">厨房</button>
+            <button class="filter-chip" data-filter="书房" role="tab" aria-selected="false">书房</button>
+            <button class="filter-chip" data-filter="卧室" role="tab" aria-selected="false">卧室</button>
+            <button class="filter-chip" data-filter="收藏" role="tab" aria-selected="false">♡ 收藏</button>
+          </div>
+        </section>
+
+        <section class="notes-section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">YOUR NOTEBOOK</p>
+              <h2>最近收集</h2>
+            </div>
+            <span class="results-label" id="resultsLabel">06 条记录</span>
+          </div>
+          <div class="notes-grid" id="notesGrid" aria-live="polite"></div>
+          <div class="empty-state" id="emptyState" hidden>
+            <div class="empty-icon">◌</div>
+            <h3>还没有找到这类灵感</h3>
+            <p>换个关键词，或者先记下第一条。</p>
+            <button class="text-button" id="emptyAddBtn">＋ 记一条灵感</button>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>灵感属于你，决定可以慢慢做。</span>
+        <span class="footer-meta">LOCAL ONLY · 自动保存</span>
+      </footer>
+    </div>
+
+    <div class="modal-backdrop" id="composer" hidden>
+      <section class="composer" role="dialog" aria-modal="true" aria-labelledby="composerTitle">
+        <div class="composer-head">
+          <div>
+            <p class="eyebrow">NEW NOTE</p>
+            <h2 id="composerTitle">记下一条灵感</h2>
+          </div>
+          <button class="close-button" id="closeComposer" aria-label="关闭">×</button>
+        </div>
+        <form id="noteForm">
+          <label class="field-label" for="noteTitle">给它一个小标题 <span>可选</span></label>
+          <input class="text-input" id="noteTitle" name="title" maxlength="40" placeholder="例如：窗边的阅读角" />
+
+          <div class="field-split">
+            <div>
+              <label class="field-label" for="noteRoom">放在哪个空间</label>
+              <select class="text-input" id="noteRoom" name="room">
+                <option>客厅</option><option>厨房</option><option>书房</option><option>卧室</option><option>卫生间</option><option>阳台</option><option>其他</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label" for="noteTag">加一个标签 <span>可选</span></label>
+              <input class="text-input" id="noteTag" name="tag" maxlength="14" placeholder="奶油风" />
+            </div>
+          </div>
+
+          <label class="field-label" for="noteBody">你想记住什么？</label>
+          <textarea class="text-input note-textarea" id="noteBody" name="body" maxlength="280" required placeholder="写下让你心动的细节，也可以记一笔尺寸或预算……"></textarea>
+
+          <label class="upload-box" for="noteImage">
+            <input id="noteImage" name="image" type="file" accept="image/*" />
+            <span class="upload-glyph">＋</span>
+            <span><strong>放一张参考图</strong><small>图片会保存在本机浏览器中</small></span>
+            <img id="imagePreview" alt="待上传图片预览" hidden />
+          </label>
+
+          <div class="composer-actions">
+            <button type="button" class="secondary-button" id="cancelComposer">先不记了</button>
+            <button type="submit" class="primary-button">保存灵感 <span>↗</span></button>
+          </div>
+        </form>
+      </section>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>

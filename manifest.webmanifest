@@ -1,0 +1,16 @@
+{
+  "name": "灵感簿 · 装修灵感随手记",
+  "short_name": "灵感簿",
+  "description": "随手记录装修材质、布局和空间灵感的本地笔记簿",
+  "start_url": "./", "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f0e8",
+  "theme_color": "#304b3a",
+  "lang": "zh-CN",
+  "icons": [{
+    "src": "./icon.svg",
+    "sizes": "any",
+    "type": "image/svg+xml",
+    "purpose": "any maskable"
+  }]
+}
